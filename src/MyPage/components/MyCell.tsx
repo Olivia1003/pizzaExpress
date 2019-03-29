@@ -25,24 +25,22 @@ export default class MyCell extends React.Component<IProps> {
     }
 
     render() {
-        return null
+        return (
+            <TouchableOpacity activeOpacity={0.5} onPress={() => { alert('被点击了!') }}>
+                <View style={styles.cellStyles}>
+                    {/*cell左侧内容*/}
+                    <View style={styles.LeftViewStyle}>
+                        {/* <Image source={{uri:this.props.LeftImage}} style={styles.LeftImageStyle}/>
+                      <Text style={styles.LeftTitleStyle}>{this.props.LeftTitle}</Text> */}
+                    </View>
+                    {/*cell右侧内容*/}
+                    <View style={styles.RightViewStyle}>
+                        {this.RightSubView()}
+                    </View>
 
-        // return (
-        //     <TouchableOpacity activeOpacity={0.5} onPress={() => { alert('被点击了!') }}>
-        //         <View style={styles.cellStyles}>
-        //             {/*cell左侧内容*/}
-        //             <View style={styles.LeftViewStyle}>
-        //                 {/* <Image source={{uri:this.props.LeftImage}} style={styles.LeftImageStyle}/>
-        //               <Text style={styles.LeftTitleStyle}>{this.props.LeftTitle}</Text> */}
-        //             </View>
-        //             {/*cell右侧内容*/}
-        //             <View style={styles.RightViewStyle}>
-        //                 {this.RightSubView()}
-        //             </View>
-
-        //         </View>
-        //     </TouchableOpacity>
-        // );
+                </View>
+            </TouchableOpacity>
+        );
     }
 
     // cell右侧子视图

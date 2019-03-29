@@ -11,9 +11,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // tab page
 import OrderPage from './dest/OrderPage/index'
-// import MyPage from './dest/MyPage/index'
+import MyPage from './dest/MyPage/index'
 
 // other page
+import Login from './dest/Login/index'
+import Detail from './dest/DetailPage/index'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
@@ -27,7 +29,7 @@ const MainPage = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarLabel: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state
-        let labelName = '菜单'
+        let labelName = 'default'
         let labelColor = focused ? '#1C7ED7' : '#aaaaaa'
         if (routeName === 'Home') {
           labelName = '菜单'
@@ -35,7 +37,7 @@ const MainPage = createBottomTabNavigator(
           labelName = '购物车'
         } else if (routeName === 'Order') {
           labelName = '订单'
-        } else if (routeName === 'MyInfo') {
+        } else if (routeName === 'MyPage') {
           labelName = '我的'
         }
         return <Text style={{ color: labelColor }}>{labelName}</Text>
@@ -76,12 +78,18 @@ const stackNavigator = createStackNavigator({
       headerBackTitle: null,
     }),
   },
-  // Login: {
-  //   screen: Login,
-  //   navigationOptions: () => ({
-  //     title: '登录'
-  //   }),
-  // },
+  Login: {
+    screen: Login,
+    navigationOptions: () => ({
+      title: '登录'
+    }),
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: () => ({
+      title: '订单详情'
+    }),
+  },
 })
 
 const RootPage = createAppContainer(stackNavigator)

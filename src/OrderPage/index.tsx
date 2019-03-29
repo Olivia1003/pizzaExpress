@@ -5,11 +5,14 @@ import {
     Text,
     View,
     SectionList,
-    Button
+    Button,
+    TouchableOpacity
 } from 'react-native';
 import { any } from 'prop-types';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
+// comp
+import TopHeader from '../common/component/TopHeader'
 
 export default class OrderPage extends React.Component {
     //隐藏垂直状态条
@@ -18,6 +21,11 @@ export default class OrderPage extends React.Component {
     horizontal = { true: any }
     //隐藏水平状态条
     showsHorizontalScrollIndicator = { false: any }
+
+    private navigateToPage(pageName: string) {
+        console.log('navigateToPage---', pageName)
+        this.props.navigation.navigate(pageName)
+    }
 
     _renderItem = (info) => {
         var txt = '  ' + info.item.title;
@@ -53,9 +61,23 @@ export default class OrderPage extends React.Component {
         ];
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>骑手订单页面</Text>
-                </View>
+            
+               
+
+                <TopHeader title={'骑手订单页面'}/>
+
+                <TouchableOpacity onPress={()=>{
+                    this.navigateToPage('Login')
+                }}>
+                    <Text>登录</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{
+                    this.navigateToPage('Detail')
+                }}>
+                    <Text>订单详情</Text>
+                </TouchableOpacity>
+
                 <View style={styles.body}>
                     <View style={styles.list}>
                         <SectionList

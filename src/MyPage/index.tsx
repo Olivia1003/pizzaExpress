@@ -10,11 +10,13 @@ import {
     ScrollView
 } from 'react-native';
 
-import MyCell from './components/MyCell'
 // var Cell = require('./src/MyCell');
 
 // import { StackNavigator, TabBarBottom, TabNavigator } from "react-navigation";
 
+// comp
+import MyCell from './components/MyCell'
+import TopHeader from '../common/component/TopHeader'
 
 export default class mypage extends React.Component {
     // static defaultProps = {
@@ -47,9 +49,10 @@ export default class mypage extends React.Component {
 
         return (
             <View style={styles.container}>
+                 <TopHeader title={'我的'}/>
 
                 {/* {this.renderNavBar()} */}
-                {/* <ScrollView>
+                <ScrollView>
                     <View style={{ marginTop: 10 }}>
                         <MyCell
                             LeftImage="collect"
@@ -92,15 +95,15 @@ export default class mypage extends React.Component {
                             RightTitle="轻松开店,招财进宝"
                         />
                     </View>
-                </ScrollView> */}
+                </ScrollView> 
 
-                <View style={styles.header}>
+                {/* <View style={styles.header}>
                     <Text style={styles.title}>我的</Text>
-                </View>
+                </View> */}
 
-                <View style={styles.foot}>
+                {/* <View style={styles.foot}>
 
-                </View>
+                </View> */}
 
             </View>
         )

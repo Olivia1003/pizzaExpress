@@ -45,7 +45,86 @@ export default class mypage extends React.Component {
     //     return <Text
     //       style={{ height: 50, textAlign: 'center', textAlignVertical: 'center', backgroundColor: '#9CEBBC', color: 'white', fontSize: 30 }}>{txt}</Text>
     // }
+    _renderItem = (info) => {
+        var txt = '  ' + info.item.title;
+        const orders=info.item.orders||'';
+        const cost=info.item.cost||'';
+        const results=info.item.results||'';
+        const scheduling=info.item.scheduling||'';
+    
+    return (
+        <View>
+    <Text
+      style={{ 
+        height:50,
+        lineHeight:55,
+        textAlignVertical: 'center', 
+        backgroundColor: "orange", 
+        color: '#000', 
+        fontSize: 18 }}>
+      {txt}
+      </Text>
+      <Text
+            style={{
+                height: 50,
+                lineHeight: 55,
+                textAlignVertical: 'center',
+                backgroundColor: "orange",
+                color: '#000',
+                fontSize: 18
+            }}>
+            {orders} 
+        </Text>
+        <Text
+            style={{
+                height: 50,
+                lineHeight: 55,
+                textAlignVertical: 'center',
+                backgroundColor: "orange",
+                color: '#000',
+                fontSize: 18
+            }}>
+            {cost} 
+        </Text>
+        <Text
+            style={{
+                height: 50,
+                lineHeight: 55,
+                textAlignVertical: 'center',
+                backgroundColor: "orange",
+                color: '#000',
+                fontSize: 18
+            }}>
+            {results} 
+        </Text>
+        <Text
+            style={{
+                height: 50,
+                lineHeight: 55,
+                textAlignVertical: 'center',
+                backgroundColor: "orange",
+                color: '#000',
+                fontSize: 18
+            }}>
+            {scheduling} 
+        </Text>
+        
+      </View>
+    )
+        }
+
     render() {
+        var sections = [
+            {
+                key: "A",
+                 data: [
+                { title: "接单指南",
+                  orders:"历史订单",
+                  cost:'账户中心' ,
+                  results:'骑手业绩',
+                  scheduling:'我的排班',}
+            ] },
+        ];
 
         return (
             <View style={styles.container}>
@@ -77,24 +156,12 @@ export default class mypage extends React.Component {
 
                     <View style={{ marginTop: 10 }}>
                         <MyCell
-                            LeftImage="card"
-                            LeftTitle="积分商城"
-                        />
-                    </View>
-                    <View style={{ marginTop: 10 }}>
-                        <MyCell
                             LeftImage="new_friend"
                             LeftTitle="今日推荐"
                             RightImage="me_new"
                         />
                     </View>
-                    <View style={{ marginTop: 10 }}>
-                        <MyCell
-                            LeftImage="pay"
-                            LeftTitle="我要合作"
-                            RightTitle="轻松开店,招财进宝"
-                        />
-                    </View>
+                    
                 </ScrollView> 
 
                 {/* <View style={styles.header}>
@@ -112,7 +179,7 @@ export default class mypage extends React.Component {
     renderNavBar() {
         return (
             <View style={styles.NavBatstyle}>
-                <Text style={styles.TitleStyle}>更多</Text>
+                <Text style={styles.TitleStyle}>我的</Text>
                 <TouchableOpacity style={styles.settingPositionStyle} onPress={() => { alert('设置按钮被点击') }}>
                 </TouchableOpacity>
             </View>

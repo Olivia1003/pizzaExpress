@@ -8,6 +8,7 @@ import {
     Button
 } from 'react-native';
 import { any } from 'prop-types';
+import { setGlobal } from '../common/Global';
 
 const onButtonPress = () => {
     alert('已送达');
@@ -20,8 +21,83 @@ export default class DetailPage extends React.Component {
     }
     _renderItem = (info) => {
         var txt = '  ' + info.item.title;
-        return <Text
-          style={{ height:600,lineHeight:55, textAlignVertical: 'center', backgroundColor: "orange", color: '#000', fontSize: 18 }}>{txt}</Text>
+        const starttime=info.item.starttime||'';
+        const address=info.item.address||'';
+        const tel=info.item.tel||'';
+        const content=info.item.content||'';
+        const time=info.item.time||'';
+
+
+        return (
+            <View>
+        <Text
+          style={{ 
+            height:50,
+            lineHeight:55,
+            textAlignVertical: 'center', 
+            backgroundColor: "orange", 
+            color: '#000', 
+            fontSize: 18 }}>
+          {txt}
+          </Text>
+          <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {time} 
+            </Text>
+            <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {address} 
+            </Text>
+            <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {starttime} 
+            </Text>
+            <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {tel} 
+            </Text>
+            <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {content} 
+            </Text>
+          </View>
+        )
+          
     }
     // _sectionComp = (info) => {
     //     var txt = info.section.key;
@@ -31,7 +107,16 @@ export default class DetailPage extends React.Component {
     render() {
         
         var sections = [
-            { data: [{ title: "订单编号：GTX960TI23333" }] },
+            {
+                key: "A",
+                 data: [
+                { title: "订单编号：GTX960TI23333",
+                  starttime:"2019-04-01 16:00",
+                  address:'送至：华东师范大学第五宿舍' ,
+                  tel:'12345678900',
+                  content:'美式田园风情披萨 x1',
+                  time:'配送剩余时间：30:00', },
+            ] },
         ];
         console.log('render orders')
         return (

@@ -29,10 +29,13 @@ export default class OrderPage extends React.Component {
 
     _renderItem = (info) => {
         var txt = '  ' + info.item.title;
+        const time=info.item.time||''
+        const address=info.item.address||''
         return (
-            <Text
+            <View>
+                 <Text
                 style={{
-                    height: 150,
+                    height: 50,
                     lineHeight: 55,
                     textAlignVertical: 'center',
                     backgroundColor: "orange",
@@ -41,6 +44,31 @@ export default class OrderPage extends React.Component {
                 }}>
                 {txt}
             </Text>
+                 <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {time} 
+            </Text>
+            <Text
+                style={{
+                    height: 50,
+                    lineHeight: 55,
+                    textAlignVertical: 'center',
+                    backgroundColor: "orange",
+                    color: '#000',
+                    fontSize: 18
+                }}>
+                {address} 
+            </Text>
+            </View>
+           
+
         )
     }
     render() {
@@ -48,14 +76,11 @@ export default class OrderPage extends React.Component {
             {
                 key: "A",
                 data: [
-                    { title: "第一个订单" },
-                    { title: "第二个订单" },
-                    { title: "第三个订单" },
-                    { title: "第四个订单" },
-                    { title: "第五个订单" },
-                    { title: "第六个订单" },
-                    { title: "第七个订单" },
-                    { title: "第八个订单" }
+                    { title: "第一个订单" ,time:'配送剩余时间：30:00',address:'送至：华东师范大学第五宿舍' },
+                    { title: "第二个订单" ,time:'配送剩余时间：30:00',address:'送至：华东师范大学第五宿舍'},
+                    { title: "第三个订单" ,time:'配送剩余时间：30:00',address:'送至：华东师范大学第五宿舍'},
+                    { title: "第四个订单" ,time:'配送剩余时间：30:00',address:'送至：华东师范大学第五宿舍'},
+                    { title: "第五个订单" ,time:'配送剩余时间：30:00',address:'送至：华东师范大学第五宿舍'},
                 ]
             },
         ];

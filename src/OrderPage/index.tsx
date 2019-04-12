@@ -125,27 +125,27 @@ export default class OrderPage extends React.Component<IProps, IState> {
         })
     }
 
-    private commitAllOrdersFinish() {
-        console.log('commitAllOrdersFinish')
-        const deliverId = getGlobal('deliverId')
-        if (deliverId) {
-            serverIns.post('/deliver/deliverfree', {
-                deliverId: 1,
-            }).then((res) => {
-                console.log('commitAllOrdersFinish success', res)
-                if (res && Number(res.status) === 200) {
-                    showToast('全部送达成功')
-                } else {
-                    showToast('全部送达失败')
-                }
-            }, (err) => {
-                console.log('commitAllOrdersFinish fail', err)
-                showToast('全部送达失败')
-            })
-        } else {
-            this.checkLogin()
-        }
-    }
+    // private commitAllOrdersFinish() {
+    //     console.log('commitAllOrdersFinish')
+    //     const deliverId = getGlobal('deliverId')
+    //     if (deliverId) {
+    //         serverIns.post('/deliver/deliverfree', {
+    //             deliverId: 1,
+    //         }).then((res) => {
+    //             console.log('commitAllOrdersFinish success', res)
+    //             if (res && Number(res.status) === 200) {
+    //                 showToast('全部送达成功')
+    //             } else {
+    //                 showToast('全部送达失败')
+    //             }
+    //         }, (err) => {
+    //             console.log('commitAllOrdersFinish fail', err)
+    //             showToast('全部送达失败')
+    //         })
+    //     } else {
+    //         this.checkLogin()
+    //     }
+    // }
 
     private renderOrderItem(item) {
         if (item && item.orderId) {
@@ -238,11 +238,11 @@ export default class OrderPage extends React.Component<IProps, IState> {
                     <Text>订单详情</Text>
                 </TouchableOpacity> */}
                 {this.renderOrderList()}
-                <Button
+                {/* <Button
                     raised
                     onPress={() => { this.commitAllOrdersFinish() }}
                     title="全部送达"
-                />
+                /> */}
             </View>
         )
     }

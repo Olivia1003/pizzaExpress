@@ -11,34 +11,85 @@ import {
     Button,
     TextInput
 } from 'react-native';
+import { showToast } from '../common/utils/Toast'
 
+// server
+import { serverIns } from '../common/utils/serverRequest'
+interface IState {
+    deliverId: string
+    password: string
+}
 
-export default class Login extends React.Component {
-    private onPressLearnMore() {
-
+interface IProps {
+    navigation: any
+}
+export default class Login extends React.Component<IProps, IState> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            deliverId: '',
+            password: ''
+        }
     }
+
+    private commitLogin() {
+        const { deliverId, password } = this.state
+        console.log('commitLogin', deliverId, password)
+        if (deliverId && password) {
+            serverIns.post('/deliver/deliverlogin', {
+                deliverId: 1,
+                password: "123"
+            }).then((res) => {
+                console.log('checkLogin success', res)
+                showToast('登录成功')
+                this.props.navigation.popToTop()
+            }, (err) => {
+                console.log('checkLogin fail', err)
+                showToast('登录失败')
+            })
+        } else {
+            showToast('请输入完整')
+        }
+    }
+
     render() {
         console.log('render HeaderTab')
         return (
-
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>PizzaRider</Text>
+                    <Text style={styles.title}>PizzaRider登录</Text>
                 </View>
                 <View style={styles.body}>
                     <View style={styles.inputRow}>
                         <Text style={styles.name}>账号：</Text>
-                        <TextInput style={styles.textInput}></TextInput>
+                        <TextInput
+                            style={styles.textInput}
+                            value={this.state.deliverId}
+                            onChangeText={(value) => {
+                                this.setState({
+                                    deliverId: value
+                                })
+                            }}
+                        />
                     </View>
                     <View style={styles.inputRow}>
                         <Text style={styles.name}>密码：</Text>
-                        <TextInput style={styles.textInput}></TextInput>
+                        <TextInput
+                            style={styles.textInput}
+                            value={this.state.password}
+                            onChangeText={(value) => {
+                                this.setState({
+                                    password: value
+                                })
+                            }}
+                            secureTextEntry={true}
+                        />
                     </View>
                 </View>
                 <View style={styles.foot}>
                     <View style={styles.loginBtn} >
                         <Button
-                            onPress={() => { this.onPressLearnMore }}
+                            onPress={() => { this.commitLogin() }}
                             title="登录"
                             color='#fff'
                         />

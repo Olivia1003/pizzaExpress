@@ -1,5 +1,5 @@
 const GlobalData = {
-    userId: '111'
+    deliverId: '1'
 }
 
 export function getGlobal(key: string) {

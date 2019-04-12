@@ -23,7 +23,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const MainPage = createBottomTabNavigator(
   {
     Order: OrderPage,
-    MyPage: MyPage
+    // MyPage: MyPage
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -81,7 +81,7 @@ const stackNavigator = createStackNavigator({
   Login: {
     screen: Login,
     navigationOptions: () => ({
-      title: '登录'
+      header: null
     }),
   },
   Detail: {

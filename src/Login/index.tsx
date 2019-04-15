@@ -15,6 +15,9 @@ import { showToast } from '../common/utils/Toast'
 
 // server
 import { serverIns } from '../common/utils/serverRequest'
+
+// Global
+import { getGlobal, setGlobal } from '../common/Global'
 interface IState {
     deliverId: string
     password: string
@@ -41,8 +44,13 @@ export default class Login extends React.Component<IProps, IState> {
                 password: "123"
             }).then((res) => {
                 console.log('checkLogin success', res)
-                showToast('登录成功')
-                this.props.navigation.popToTop()
+                if (res && res.data && res.data.deliverId) {
+                    showToast('登录成功')
+                    setGlobal('deliverId', res.data.deliverId)
+                    this.props.navigation.popToTop()
+                } else {
+                    showToast('登录失败')
+                }
             }, (err) => {
                 console.log('checkLogin fail', err)
                 showToast('登录失败')

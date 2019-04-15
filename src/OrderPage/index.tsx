@@ -56,6 +56,8 @@ export default class OrderPage extends React.Component<IProps, IState> {
             setTimeout(() => {
                 this.navigateToPage('Login')
             }, 1000)
+        } else {
+            showToast('已登录')
         }
     }
 
@@ -107,22 +109,30 @@ export default class OrderPage extends React.Component<IProps, IState> {
         }
     }
 
-    private commitOrderFinish(orderId) {
-        console.log('commitOrderFinish', orderId)
-        serverIns.post('/deliver/deliverfinishoneorder', {
-            pizzaOrderId: orderId
-        }).then((res) => {
-            console.log('commitOrderFinish success', res)
-            if (res && Number(res.status) === 200) {
-                showToast('送达成功')
-                this.fetchOrderList()
-            } else {
+    private commitOrderFinish(orderItem) {
+        console.log('commitOrderFinish', orderItem)
+        const { orderId, expressId } = orderItem
+        const deliverId = getGlobal('deliverId')
+        if (deliverId) {
+            serverIns.post('/deliver/deliverfinishoneorder', {
+                pizzaOrderId: orderId,
+                expressOrderId: expressId,
+                deliverId
+            }).then((res) => {
+                console.log('commitOrderFinish success', res)
+                if (res && Number(res.status) === 200) {
+                    showToast('送达成功')
+                    this.fetchOrderList()
+                } else {
+                    showToast('送达失败')
+                }
+            }, (err) => {
+                console.log('commitOrderFinish fail', err)
                 showToast('送达失败')
-            }
-        }, (err) => {
-            console.log('commitOrderFinish fail', err)
-            showToast('送达失败')
-        })
+            })
+        } else {
+            this.checkLogin()
+        }
     }
 
     // private commitAllOrdersFinish() {
@@ -185,11 +195,10 @@ export default class OrderPage extends React.Component<IProps, IState> {
                         isOver ? (<Button
                             raised
                             disabled={true}
-                            onPress={() => { this.commitOrderFinish(item.orderId) }}
                             title="已送达"
                         />) : (<Button
                             raised
-                            onPress={() => { this.commitOrderFinish(item.orderId) }}
+                            onPress={() => { this.commitOrderFinish(item) }}
                             title="确认送达"
                         />)
                     }
@@ -203,18 +212,28 @@ export default class OrderPage extends React.Component<IProps, IState> {
     private renderOrderList() {
         const { orderList } = this.state
 
+        let orderListView = undefined
+
+        if (orderList && orderList.length > 0) {
+            orderListView = orderList.map((oItem, index) => {
+                return (
+                    <View key={index}>
+                        {this.renderOrderItem(oItem)}
+                    </View>
+                )
+            })
+        } else {
+            orderListView = (
+                <View style={styles.blankWrap}>
+                    <Text style={styles.blankTxt}>啥也没有~</Text>
+                </View>
+            )
+        }
+
         return (
             <View style={styles.orderListWrap}>
                 <ScrollView style={styles.orderList}>
-                    {
-                        orderList.map((oItem, index) => {
-                            return (
-                                <View key={index}>
-                                    {this.renderOrderItem(oItem)}
-                                </View>
-                            )
-                        })
-                    }
+                    {orderListView}
                 </ScrollView>
             </View>
         )
@@ -294,6 +313,17 @@ const styles = StyleSheet.create({
         // backgroundColor: "orange",
         color: '#000',
         fontSize: 18
+    },
+    // blank
+    blankWrap: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10
+    },
+    blankTxt: {
+        fontSize: 15,
+        color: '#777',
+        textAlign: 'center'
     }
 });
 

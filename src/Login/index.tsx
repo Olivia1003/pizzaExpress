@@ -40,8 +40,8 @@ export default class Login extends React.Component<IProps, IState> {
         console.log('commitLogin', deliverId, password)
         if (deliverId && password) {
             serverIns.post('/deliver/deliverlogin', {
-                deliverId: 1,
-                password: "123"
+                deliverId,
+                password
             }).then((res) => {
                 console.log('checkLogin success', res)
                 if (res && res.data && res.data.deliverId) {
